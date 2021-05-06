@@ -6,23 +6,32 @@ public class Player1Trigger : MonoBehaviour
 {
     public Collider Col;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float DamageAmt = 0.1f;
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if(other.gameObject.CompareTag("Player2"))
+        if (Player1Actions.Hits == false)
+        {
+            Col.enabled = true;
+        }
+        else
         {
             Col.enabled = false;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player2"))
+        {
+            // Col.enabled = false;
+            Player1Actions.Hits = true;
+            SaveScript.Player2Health -= DamageAmt;
+            if (SaveScript.Player2Timer < 2.0f)
+            {
+                SaveScript.Player2Timer += 2.0f;
+            }
         }
     }
 }

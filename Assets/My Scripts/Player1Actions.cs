@@ -5,12 +5,20 @@ using UnityEngine;
 public class Player1Actions : MonoBehaviour
 {
     public float JumpSpeed = 1.5f;
+
     public GameObject Player1;
+
     private Animator Anim;
+
     private AnimatorStateInfo Player1Layer0;
+
     private AudioSource MyPlayer;
+
     public AudioClip PunchWoosh;
+
     public AudioClip KickWoosh;
+
+    public static bool Hits = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,32 +33,36 @@ public class Player1Actions : MonoBehaviour
         // Get Animator
         Player1Layer0 = Anim.GetCurrentAnimatorStateInfo(0);
 
-        if(Player1Layer0.IsTag("Motion"))
+        if (Player1Layer0.IsTag("Motion"))
         {
-            if(Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1"))
             {
                 Anim.SetTrigger("LightPunch");
+                Hits = false;
             }
-            if(Input.GetButtonDown("Fire2"))
+            if (Input.GetButtonDown("Fire2"))
             {
                 Anim.SetTrigger("HeavyPunch");
+                Hits = false;
             }
-            if(Input.GetButtonDown("Fire3"))
+            if (Input.GetButtonDown("Fire3"))
             {
                 Anim.SetTrigger("LightKick");
+                Hits = false;
             }
-            if(Input.GetButtonDown("Fire4"))
+            if (Input.GetButtonDown("Fire4"))
             {
                 Anim.SetTrigger("HeavyKick");
+                Hits = false;
             }
-            if(Input.GetButtonDown("Block"))
+            if (Input.GetButtonDown("Block"))
             {
                 Anim.SetTrigger("BlockOn");
-            }            
+            }
         }
-        if(Player1Layer0.IsTag("Block"))
+        if (Player1Layer0.IsTag("Block"))
         {
-            if(Input.GetButtonUp("Block"))
+            if (Input.GetButtonUp("Block"))
             {
                 Anim.SetTrigger("BlockOff");
             }
